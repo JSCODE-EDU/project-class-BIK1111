@@ -14,7 +14,7 @@ export class BoardsService {
     Promise<Board> {
         return this.boardRepository.createBoard(createBoardDto);
     }
-
+        
 
     // 유의점 : 해당 함수의 경우 리스트 안에 객체가 담겨있으므로 타입 지정시 Board'[]' 형태로 지정
     // 'board'는 릴레이션 명
@@ -34,7 +34,7 @@ export class BoardsService {
         //findOne(id) 로만 하면 안됨 why?
         const board = await this.boardRepository.findOne({ where: { id } });
         
-        if(!board) throw new NotFoundException(`Does not exist the board with id ${id}`)
+        if(!board) throw new NotFoundException(`Does not exist the board with id : ${id}`)
 
         return board
     }
@@ -58,7 +58,7 @@ export class BoardsService {
         const result = await this.boardRepository.delete(id);
 
         if(result.affected === 0 ) {
-            throw new NotFoundException(`Does not exist the board with id ${id}`)
+            throw new NotFoundException(`Does not exist the board with id : ${id}`)
         }
     }
 
