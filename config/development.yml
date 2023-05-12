@@ -1,0 +1,5 @@
+db:
+  host: 'localhost'
+  username: 'user'
+  password: 'tkfkdgo12'
+  synchronize: true

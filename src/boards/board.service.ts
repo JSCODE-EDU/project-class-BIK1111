@@ -14,7 +14,7 @@ export class BoardsService {
     Promise<Board> {
         return this.boardRepository.createBoard(createBoardDto);
     }
-        
+            
 
     // 유의점 : 해당 함수의 경우 리스트 안에 객체가 담겨있으므로 타입 지정시 Board'[]' 형태로 지정
     // 'board'는 릴레이션 명
@@ -24,7 +24,7 @@ export class BoardsService {
         const query = this.boardRepository.createQueryBuilder('board')
         query.limit(100)
         query.orderBy('board.createdAt', 'DESC');
-
+        
         const boards = await query.getMany();
 
         return boards;

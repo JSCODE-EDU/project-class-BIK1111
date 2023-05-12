@@ -14,17 +14,18 @@ export class BoardsController {
         return this.boardService.getAllBoards();
     }
     
+    @Get('/:id')
+    @UsePipes(ValidationPipe)
+    getBoardById(@Param('id') id : number) : Promise<Board> {
+        return this.boardService.getBoardById(id);
+    }
+
     // boards/:id 보다 앞서서 존재해야함
     // 그렇지 않으면 search를 id로 인식함.
     @Get('/search')
+    @UsePipes(ValidationPipe)
     getBoardsByKeyword(@Query('keyword') keyword: string) : Promise<Board[]> {
         return this.boardService.getBoardsByKeyword(keyword);
-    }
-
-
-    @Get('/:id')
-    getBoardById(@Param('id') id : number) : Promise<Board> {
-        return this.boardService.getBoardById(id);
     }
 
     @Post()
