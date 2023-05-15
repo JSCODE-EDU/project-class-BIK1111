@@ -3,7 +3,7 @@ import { Board } from './board.entity';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { EditBoardDto } from './dto/edit-board.dto';
 import { BoardRepository } from './board.repository';
-
+import { GetBoardsByKeywordDto } from './dto/search-by-keyword-board';
 @Injectable()
 export class BoardsService {
     constructor(
@@ -21,9 +21,9 @@ export class BoardsService {
         return this.boardRepository.getAllBoards();
     }
 
-    async getBoardsByKeyword(keyword : string) : Promise<Board[]> {
+    async getBoardsByKeyword(getBoardsByKeywordDto : GetBoardsByKeywordDto) : Promise<Board[]> {
 
-        return this.boardRepository.getBoardsByKeyword(keyword);
+        return this.boardRepository.getBoardsByKeyword(getBoardsByKeywordDto);
     }
     
        

@@ -4,6 +4,7 @@ import { DataSource, Repository } from "typeorm";
 import { CreateBoardDto } from "./dto/create-board.dto";
 import { NotFoundException } from "@nestjs/common";
 import { EditBoardDto } from "./dto/edit-board.dto";
+import { GetBoardsByKeywordDto } from "./dto/search-by-keyword-board";
 
 export class BoardRepository extends Repository<Board> {
     constructor(@InjectRepository(Board) private dataSource : DataSource) {
@@ -47,7 +48,9 @@ export class BoardRepository extends Repository<Board> {
     }
 
 
-    async getBoardsByKeyword(keyword : string) : Promise<Board[]> {
+    async getBoardsByKeyword(getBoardsByKeywordDto : GetBoardsByKeywordDto) : Promise<Board[]> {
+        
+        const { keyword } = getBoardsByKeywordDto
 
         const query = this.createQueryBuilder('board')
         query.where('board.title LIKE :keyword', { keyword: `%${keyword}%` })
@@ -65,7 +68,7 @@ export class BoardRepository extends Repository<Board> {
         const result = await this.delete(id);
 
         if(result.affected === 0 ) {
-            throw new NotFoundException(`Does not exist the board with id : ${id}`)
+            throw new NotFoundException(`Does not exist the board with id! : ${id}`)
         }
     }
 
