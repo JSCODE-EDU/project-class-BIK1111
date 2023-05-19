@@ -4,15 +4,16 @@ import { CreateBoardDto } from './dto/create-board.dto';
 import { EditBoardDto } from './dto/edit-board.dto';
 import { BoardRepository } from './board.repository';
 import { GetBoardsByKeywordDto } from './dto/search-by-keyword-board';
+
+
 @Injectable()
 export class BoardsService {
     constructor(
         private boardRepository: BoardRepository
     ) {}
     
-    async createBoard(createBoardDto : CreateBoardDto) :
-    Promise<Board> {
-        return this.boardRepository.createBoard(createBoardDto);
+    async createBoard(createBoardDto : CreateBoardDto) : Promise<Board> {
+        return await this.boardRepository.createBoard(createBoardDto);
     }
             
 
