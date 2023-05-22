@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Patch, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Patch, Post, Query, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { BoardsService } from './board.service';
 import { Board } from './board.entity';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { EditBoardDto } from './dto/edit-board.dto';
 import { GetBoardsByKeywordDto } from './dto/search-by-keyword-board';
 import { ApiTags, ApiOperation, ApiBody, ApiCreatedResponse, ApiBadGatewayResponse, ApiBadRequestResponse, ApiOkResponse, ApiQuery, ApiParam } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('boards')
+@UseGuards(AuthGuard())
 @ApiTags('게시판 API')
 export class BoardsController {
     constructor(private boardService: BoardsService) { }
